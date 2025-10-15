@@ -12,9 +12,19 @@ const PORT = 3000;
 
 // CORS setup (required for frontend communication)
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.header('Access-Control-Allow-Origin', 'https://arcticvault-frontend.pages.dev');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
+});
+
+// --- Health Check / Root Route ---
+app.get('/', (req, res) => {
+    res.status(200).send({ 
+        status: 'OK', 
+        message: 'Debate Service is running!',
+        api_endpoint: '/api/debate (POST)',
+        ws_endpoint: '/ws/debate?id=...'
+    });
 });
 
 // --- REST API ROUTE (Initiation) ---
